@@ -1,0 +1,11 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <article class="mx-auto max-w-lg">
+    {{ form_start(loginForm) }}
+    {{ form_errors(loginForm) }}
+    {{ form_end(loginForm) }}
+  </article>
+{% endblock %}

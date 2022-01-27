@@ -1,0 +1,22 @@
+<header class="bg-gray-800 text-white py-4 select-none">
+  <div class="content-container">
+    <div class="flex justify-between items-center">
+      {% include '_partials/branding.html.twig' %}
+
+      {% if app.user %}
+        {% include '_partials/main-navigation.html.twig' %}
+      {% endif %}
+
+      <div class="ml-auto flex py-1 px-2 items-center text-base border border-gray-700 text-gray-600 rounded">
+        <span class="material-icons text-base font-light">search</span>
+        <span class="ml-1 flex items-center">
+          <kbd>⌘</kbd>
+          <span class="px-0.5">+</span>
+          <kbd class="text-sm">K</kbd>
+        </span>
+      </div>
+
+      {% include '_partials/user.html.twig' %}
+    </div>
+  </div>
+</header>

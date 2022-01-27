@@ -1,0 +1,25 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block content %}
+  <article class="flex items-start">
+    <nav class="flex flex-col w-1/4 flex-shrink-0 pr-8">
+      <h2 class="mb-8 text-xl font-medium">{% block category %}{% endblock %}</h2>
+      {% block navigation %}{% endblock %}
+    </nav>
+    <div class="flex flex-col w-3/4 flex-shrink flex-grow ">
+      <div class="flex items-center mb-4 p-2 rounded bg-gray-50 dark:bg-black/25 text-sm text-gray-400">
+
+        <span class="px-1 select-none">
+          {{ block('category') }}
+        </span>
+
+        {% if not (app.request.attributes.get('_route') ends with '.index') %}
+          <span class="px-1 text-gray-200 dark:text-gray-600 select-none">/</span>
+          <span class="px-1">{{ block('title') }}</span>
+        {% endif %}
+      </div>
+
+      {% block inner_content %}{% endblock %}
+    </div>
+  </article>
+{% endblock %}

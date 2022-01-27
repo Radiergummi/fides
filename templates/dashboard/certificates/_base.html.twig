@@ -1,0 +1,10 @@
+{% extends 'dashboard/_base.html.twig' %}
+{% from '_macros/navigation-link.html.twig' import navigationLink %}
+
+{% block category %}Certificates{% endblock %}
+
+{% block navigation %}
+  {{ navigationLink('Certificates', path('app.certificates.index')) }}
+  {{ navigationLink('Revoked Certificates', path('app.certificates.revoked')) }}
+  {{ navigationLink('Certificate Authority', path('app.certificates.authorities')) }}
+{% endblock %}

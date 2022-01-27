@@ -1,0 +1,22 @@
+{% extends 'dashboard/certificates/_base.html.twig' %}
+
+{% block title %}Revoked Certificates{% endblock %}
+
+{% block inner_content %}
+  <header class="mb-8 flex justify-between items-center">
+    <h2 class="page-title">Revoked Certificates</h2>
+  </header>
+
+  <ul>
+    {% for certificate in certificates %}
+      <li class="contents">
+        <a href="{{ path('app.certificates.single', {'id': certificate.id}) }}"
+           class="flex justify-between items-center bg-gray-100 dark:bg-gray-800 border dark:border-gray-700 shadow-sm mb-2 py-2 px-4 rounded">
+          <code>#{{ certificate.serialNumber }}</code>
+          <span class="ml-4 text-gray-500 dark:text-gray-400">{{ certificate.user.userIdentifier }}</span>
+          <span class="ml-auto">{{ certificate.createdAt.format('d.m.Y H:i') }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

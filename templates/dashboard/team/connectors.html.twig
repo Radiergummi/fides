@@ -1,0 +1,56 @@
+{% extends 'dashboard/_base.html.twig' %}
+{% from '_macros/navigation-link.html.twig' import navigationLink %}
+
+{% block category %}Team{% endblock %}
+{% block title %}Connectors{% endblock %}
+
+{% block navigation %}
+  {{ navigationLink('Users', path('app.team.users')) }}
+  {{ navigationLink('Connectors', path('app.team.connectors')) }}
+{% endblock %}
+
+{% block inner_content %}
+  <header class="mb-8 flex flex-col">
+    <h2 class="page-title">Connectors</h2>
+    <p class="text-sm mt-1 text-gray-500 font-light">
+      To enable authentication using an external account provider, configure one
+      of the available connectors here. If your provider is not listed, but
+      supports OAuth, you may configure them using the <em>Custom OAuth</em>
+      connector.
+    </p>
+  </header>
+
+  <div class="grid grid-cols-3 gap-4">
+    {% for connector in connectors %}
+      <a href="#" class="contents">
+        <article class="flex items-center justify-between p-4 rounded-lg shadow-lg hover:shadow-xl border transition-all {{ connector.enabled ? 'text-white bg-green-500 border-green-600/50 shadow-green-600/30' : 'bg-white dark:bg-gray-800 border-gray-100' }}">
+          <header>
+            <h3 class="text-xl font-medium {{ connector.enabled ? 'text-white' : 'text-gray-600' }}">
+              {{ connector.provider.name }}
+            </h3>
+            <span class="{{ connector.enabled ? 'text-green-200' : 'text-gray-400' }}">
+              {{ connector.enabled ? 'Enabled' : 'Disabled' }}
+            </span>
+          </header>
+
+          <div class="w-8 h-8 {{ connector.enabled ? 'brightness-1000' : '' }} brand brand--{{ connector.provider.value }}"></div>
+        </article>
+      </a>
+    {% endfor %}
+
+    {% for provider in missingConnectors %}
+      <a href="#" class="contents">
+        <article class="flex items-center justify-between p-4 rounded-lg shadow-lg hover:shadow-xl bg-white dark:bg-gray-800 border border-gray-100 transition-all">
+          <header>
+            <h3 class="text-xl font-medium text-gray-600">
+              {{ provider.name }}
+            </h3>
+            <span class="text-gray-400">Disabled</span>
+          </header>
+
+          <div class="w-8 h-8 brand brand--{{ provider.value }}"></div>
+        </article>
+      </a>
+    {% endfor %}
+  </div>
+{% endblock %}

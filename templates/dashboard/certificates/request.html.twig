@@ -1,0 +1,21 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Request Certificate{% endblock %}
+
+{% block content %}
+  <header class="flex justify-between items-center">
+    <h2 class="page-title">Request a new certificate</h2>
+  </header>
+
+  <div class="flex">
+    <div class="flex-grow mr-8">
+      {{ form_start(requestUserCertificateForm) }}
+      {{ form_end(requestUserCertificateForm) }}
+    </div>
+    <aside class="w-1/3 pt-8 text-sm font-light text-gray-500">
+      <p class="mb-4">
+        This is a help text.
+      </p>
+    </aside>
+  </div>
+{% endblock %}

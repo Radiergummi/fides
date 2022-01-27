@@ -1,0 +1,112 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Certificate #{{ certificate.serialNumber }}{% endblock %}
+
+{% block content %}
+  <header class="mb-8 flex justify-between items-center">
+    <h2 class="page-title">
+      Certificate
+      <code>#{{ certificate.serialNumber }}</code>
+    </h2>
+
+    {% if not certificate.revoked %}
+      <a href="{{ path('app.certificates.revoke', {'id': certificate.id}) }}"
+         class="button button--raised button--danger">
+        Revoke Certificate
+      </a>
+    {% else %}
+      <strong class="font-medium">Revoked
+        <time>
+          {{ certificate.revokedAt|ago }}
+        </time>
+      </strong>
+    {% endif %}
+  </header>
+
+  <section class="mb-8 flex items-start">
+    <table class="w-2/3 mr-8 table">
+      <tbody>
+      <tr>
+        <th>CA</th>
+        <td>
+          <a class="text-blue-500 underline-offset-2 underline"
+             href="{{ path('app.certificates.authorities') }}">
+            <code>{{ certificate.certificateAuthority.identifier }}</code>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <th>Issued to</th>
+        <td>
+          <a class="text-blue-500 underline-offset-2 underline"
+             href="{{ path('app.team.users.single', {'id': certificate.user.id}) }}">
+            {{ certificate.user.name ?? certificate.user.email }}
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <th>Valid in zones</th>
+        <td>
+          <div class="flex">
+            {% for zone in certificate.securityZones %}
+              <a class="text-blue-500 underline-offset-2 underline"
+                 href="{{ path('app.hosts.index') }}">{{ zone.displayName }}</a>
+              {% if not loop.last %}
+                <span>,&nbsp;</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Created</th>
+        <td>{{ certificate.createdAt|ago }}</td>
+      </tr>
+      <tr>
+        <th>Valid From</th>
+        <td>{{ certificate.validFrom|ago }}</td>
+      </tr>
+      <tr>
+        <th>Expires</th>
+        <td>{{ certificate.validUntil|ago }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="w-1/3">
+        <pre class="flex flex-col">
+          {% set colors = {
+            ' ': 'bg-gray-100 dark:bg-gray-800',
+            '.': 'bg-stone-500',
+            'o': 'bg-red-500',
+            '+': 'bg-amber-500',
+            '=': 'bg-yellow-500',
+            '*': 'bg-lime-500',
+            'B': 'bg-emerald-500',
+            'O': 'bg-teal-500',
+            'X': 'bg-cyan-500',
+            '@': 'bg-sky-500',
+            '%': 'bg-rose-500',
+            '&': 'bg-indigo-500',
+            '#': 'bg-violet-500',
+            '/': 'bg-purple-500',
+            '^': 'bg-fuchsia-500',
+            'S': 'bg-pink-500',
+            'E': 'bg-blue-500'
+          } %}
+          {% for line in visual | split('\n') %}
+            <div class="flex border-gray-300">
+              {%- for character in line | split('') -%}
+                {% set color = colors[character] %}
+                <div class="rounded-full m-0.5 w-4 h-6 {{ color }}"></div>
+              {%- endfor -%}
+            </div>
+          {% endfor %}
+      </pre>
+    </div>
+  </section>
+
+  <section>
+    <pre class="break-words select-all bg-gray-100 dark:bg-gray-800 rounded-lg p-4"
+         style="white-space:break-spaces">{{ certificate.content }}</pre>
+  </section>
+{% endblock %}

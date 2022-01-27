@@ -1,0 +1,22 @@
+.brand {
+    @apply bg-no-repeat bg-center bg-cover;
+}
+
+.brand.brand--microsoft {
+    background-image: url('../images/brands/microsoft.svg')
+}
+
+.brand.brand--custom {
+    background-image: url('../images/brands/custom.svg')
+}
+
+.brand.brand--github {
+    background-image: url('../images/brands/github.svg')
+}
+
+.brand.brand--google {
+    background-image: url('../images/brands/google.svg')
+}
+.brand.brand--okta {
+    background-image: url('../images/brands/okta.svg')
+}

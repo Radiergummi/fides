@@ -1,0 +1,7 @@
+<h1 class="text-lg text-2xl font-medium">
+  {% if app.user %}
+    <a href="{{ path('dashboard.index') }}">Fides</a>
+  {% else %}
+    <a href="{{ path('index') }}">Fides</a>
+  {% endif %}
+</h1>

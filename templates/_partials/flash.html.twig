@@ -1,0 +1,21 @@
+<aside class="{% if app.session.flashBag.peekAll|length > 0 %}mb-8{% endif %}">
+  {# read and display several types of flash messages #}
+  {% for label, messages in app.flashes(['error', 'warning']) %}
+    {% for message in messages %}
+      <div class="p-4 font-light text-white bg-red-400 shadow-red-400/25 shadow-lg rounded"
+           role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+
+  {# read and display all flash messages #}
+  {% for label, messages in app.flashes(['success']) %}
+    {% for message in messages %}
+      <div class="p-4 font-light text-white bg-green-400 shadow-green-400/25 shadow-lg rounded">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endfor %}
+
+</aside>

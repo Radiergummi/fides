@@ -1,0 +1,32 @@
+@import '_tailwind.css';
+@import '_brands.css';
+@import '_illustrations.css';
+@import '_tables.css';
+@import '_buttons.css';
+@import '_cards.css';
+
+body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200;
+}
+
+hr {
+    @apply w-full h-0.5 border-gray-200 dark:border-gray-700 mt-4 mb-3 ;
+}
+
+pre {
+    white-space: pre;
+    max-width:   100%;
+    overflow:    auto;
+}
+
+.content-container {
+    @apply px-8 mx-auto max-w-6xl;
+}
+
+.page-title {
+    @apply font-medium text-2xl;
+}
+
+.material-icons {
+    @apply select-none align-bottom;
+}

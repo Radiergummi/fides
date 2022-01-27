@@ -1,0 +1,26 @@
+{% macro navigationLink(title, url, attr = {}) %}
+  {% set currentUrl = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+  {% set strict = attr.strict ?? true %}
+  {% set isActive = strict ? currentUrl == url : currentUrl starts with url %}
+  {% set activeClass = attr.active_class|default('text-blue-500') %}
+  {% set attr = attr|merge({
+    'class': 'block py-1 hover:text-blue-500 transition-all ' ~ (attr.class|default('') ~ ' ' ~ (isActive ? activeClass : ''))|trim,
+    'href': url
+  }) %}
+
+  <a {{ block('attributes') }}>{{ title|trans() }}</a>
+{% endmacro %}
+
+{% block attributes -%}
+  {%- for attrname, attrvalue in attr|filter((k, v) => k not in [
+    'active_class',
+    'strict'
+  ]) -%}
+    {{- " " -}}
+    {%- if attrvalue is same as(true) -%}
+      {{- attrname }}="{{ attrname }}"
+    {%- elseif attrvalue is not same as(false) -%}
+      {{- attrname }}="{{ attrvalue }}"
+    {%- endif -%}
+  {%- endfor -%}
+{%- endblock attributes -%}

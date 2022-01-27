@@ -1,0 +1,15 @@
+.card {
+    @apply rounded-lg shadow-lg border border-gray-100 overflow-hidden;
+}
+
+.card .card__card-header {
+    @apply pt-2 px-4 mb-4;
+}
+
+.card .card__card-body {
+    @apply px-4 pb-4;
+}
+
+.card .card__card-footer {
+    @apply p-4 bg-gray-50;
+}

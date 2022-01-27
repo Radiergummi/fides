@@ -1,0 +1,12 @@
+{% extends "_layout/base.html.twig" %}
+
+
+{% block body %}
+  <div class="content-container">
+    {% embed "_partials/flash.html.twig" %}
+      {% block flash %}{% endblock %}
+    {% endembed %}
+
+    {% block content %}{% endblock %}
+  </div>
+{% endblock %}

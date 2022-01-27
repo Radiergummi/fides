@@ -1,0 +1,57 @@
+{% extends 'dashboard/certificates/_base.html.twig' %}
+
+{% block title %}Certificate Authority{% endblock %}
+
+{% block inner_content %}
+  <header class="mb-8 flex justify-between items-center">
+    <h2 class="page-title">Certificate Authority</h2>
+
+    <a href="{{ path('app.certificates.request') }}"
+       class="button button--raised button--danger">
+      Rotate
+    </a>
+  </header>
+
+  <article class="mb-8 rounded xl p-4 border border-gray-300 dark:border-gray-700">
+    <header class="mb-4 flex justify-between items-center">
+      <h3 class="font-medium text-lg">
+        <code>{{ active.identifier }}</code>
+      </h3>
+
+      <span class="text-sm text-gray-500">Issued certificates: {{ active.lastIssuedSerialNumber }}</span>
+    </header>
+
+    <section class="mb-4 text-gray-500">
+      {% if active.comment %}
+        <p>{{ active.comment }}</p>
+      {% else %}
+        <span>No comment available</span>
+      {% endif %}
+    </section>
+
+    <pre class="p-4 max-w-full bg-gray-100 dark:bg-gray-800 rounded">{{ active.publicKey }}</pre>
+  </article>
+
+  <table class="table">
+    <tbody>
+    {% for certificateAuthority in certificateAuthorities %}
+      <tr>
+        <th class="w-1/2 sm:w-1/4 lg:w-1/5">
+          <div class="flex items-center {{ not loop.first ? 'text-gray-400' : '' }}">
+            <a class="block" href="{{ path('app.certificates.authorities', {
+              'id': certificateAuthority.id
+            }) }}">
+              <span>Revision <code>#{{ loop.revindex }}</code></span>
+              <code class="ml-2">{{ certificateAuthority.identifier }}</code>
+            </a>
+
+            {% if loop.first %}
+              <span class="block ml-2 py-1 px-2 bg-green-500 dark:bg-green-700 text-green-200 text-white rounded text-sm font-medium uppercase">Active</span>
+            {% endif %}
+          </div>
+        </th>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

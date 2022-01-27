@@ -1,0 +1,47 @@
+.button {
+    @apply rounded py-2 px-4 bg-gray-400 shadow text-white cursor-pointer focus:ring hover:ring transition-all select-none;
+}
+
+.button.button--active {
+    @apply bg-slate-300;
+}
+
+.button--primary {
+    @apply bg-blue-500 text-blue-50;
+}
+
+.button--danger {
+    @apply bg-red-500 text-red-50 focus:ring-red-300 hover:ring-red-300 darkfocus:ring-red-700 dark:hover:ring-red-700;
+}
+
+.button--inset {
+    @apply bg-transparent;
+}
+
+.button--depressed {
+    @apply shadow-none bg-gray-300;
+}
+
+.button--outlined {
+    @apply bg-transparent border border-gray-500 text-gray-500;
+}
+
+.button.button--outlined.button--active {
+    @apply bg-gray-500 text-white;
+}
+
+.button--dense {
+    @apply py-1 px-2 text-sm;
+}
+
+.button--raised {
+    @apply shadow-lg;
+}
+
+.button--primary.button--raised {
+    @apply shadow-blue-500/50 dark:shadow-blue-700/50;
+}
+
+.button--danger.button--raised {
+    @apply shadow-red-500/50 dark:shadow-red-700/50;
+}

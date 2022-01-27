@@ -1,0 +1,52 @@
+{% extends 'dashboard/_base.html.twig' %}
+{% from '_macros/navigation-link.html.twig' import navigationLink %}
+
+{% block category %}Team{% endblock %}
+{% block title %}Users{% endblock %}
+
+{% block navigation %}
+  {{ navigationLink('Users', path('app.team.users')) }}
+  {{ navigationLink('Connectors', path('app.team.connectors')) }}
+{% endblock %}
+
+{% block inner_content %}
+  <header class="mb-4 flex items-center justify-between">
+    <h2 class="page-title">Users</h2>
+
+    <button class="ml-4 button button--primary button--raised">
+      <span>Add user</span>
+    </button>
+  </header>
+
+  <table class="table">
+    <tbody>
+    {% for user in users %}
+      {% set name = user.name ?? user.email | split('@') | first %}
+      <tr>
+        <td class="w-10 !pl-0">
+          <a href="{{ path('app.team.users.single', {'id': user.id}) }}"
+             class="block relative w-6 h-6 bg-blue-200 rounded-full">
+            <div class="absolute left-0 top-0 w-full h-full flex justify-center items-center ">
+              <strong class="font-medium text-sm opacity-40">{{ name | first | upper }}</strong>
+            </div>
+            <img class="relative z-10 rounded-full" src="{{ gravatar(user.email) }}" alt="Gravatar image of {{ user.email }}">
+          </a>
+        </td>
+        <th class="w-1/2 sm:w-1/4 lg:w-1/5">
+          <a class="block" href="{{ path('app.team.users.single', {'id': user.id}) }}">
+            {{ name }}
+          </a>
+        </th>
+        <td class="align-middle">
+          <a href="{{ path('app.team.users.single', {'id': user.id}) }}" class="flex items-center">
+            <span>{{ user.email }}</span>
+            {% if user.verified %}
+              <span class="material-icons ml-1 text-blue-500">verified</span>
+            {% endif %}
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,4 @@
+doctrine_native_enums:
+  enum_types:
+    App\Entity\Enum\AuthConnectorProvider: ~
+    App\Entity\Enum\UserRole: ~

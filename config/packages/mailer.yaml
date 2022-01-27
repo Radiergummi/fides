@@ -1,0 +1,7 @@
+framework:
+  mailer:
+    dsn: '%env(MAILER_DSN)%'
+    envelope:
+      sender: 'mailer@fides.io'
+    headers:
+      from: 'Fides <m@9dev.de>'

@@ -1,0 +1,20 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Edit Host{% endblock %}
+
+{% block content %}
+  <header class="mb-4 flex items-center justify-between">
+    <h2 class="page-title">Edit Host {{ host.displayName }}</h2>
+  </header>
+
+  <div class="flex">
+    <div class="flex-grow mr-8">
+      {{ form_start(editHostForm) }}
+      {{ form_end(editHostForm) }}
+    </div>
+    <aside class="w-1/3 pt-8 text-sm font-light text-gray-500">
+      <p class="mb-4">
+      </p>
+    </aside>
+  </div>
+{% endblock %}

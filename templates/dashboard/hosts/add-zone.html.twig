@@ -1,0 +1,28 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Add Security Zone{% endblock %}
+
+{% block content %}
+  <header class="mb-4 flex items-center justify-between">
+    <h2 class="page-title">Add Security Zone</h2>
+  </header>
+
+  <div class="flex">
+    <div class="flex-grow mr-8">
+      {{ form_start(addZoneForm) }}
+      {{ form_end(addZoneForm) }}
+    </div>
+    <aside class="w-1/3 pt-8 text-sm font-light text-gray-500">
+      <p class="mb-4">
+        Security zones segregate your fleet into distinct authorization areas.
+        By sorting servers into zones, you can make sure engineers only have
+        the level of access they actually require for their work.
+      </p>
+      <p>
+        <strong class="font-medium">Tip:</strong><br>
+        Servers may be part of multiple zones, so you can model your company's
+        authorization structure as required.
+      </p>
+    </aside>
+  </div>
+{% endblock %}

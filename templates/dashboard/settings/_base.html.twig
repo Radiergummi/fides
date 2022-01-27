@@ -1,0 +1,25 @@
+{% extends '_layout/default.html.twig' %}
+{% from '_macros/navigation-link.html.twig' import navigationLink %}
+
+{% block content %}
+  <article class="flex items-start">
+    <nav class="flex flex-col mr-8 w-1/4">
+      <h2 class="mb-8 text-xl font-medium">Settings</h2>
+
+      {{ navigationLink('Settings', path('app.settings.index')) }}
+      {{ navigationLink('Update Profile', path('app.settings.profile')) }}
+      {{ navigationLink('Change your password', path('app.settings.password')) }}
+    </nav>
+    <div class="flex-grow">
+      <div class="flex items-center p-2 rounded bg-gray-50 dark:bg-black/25 text-sm text-gray-400">
+        <span class="px-1 select-none">Settings</span>
+        {% if app.request.attributes.get('_route') != 'app.settings.index' %}
+          <span class="px-1 text-gray-200 dark:text-gray-600 select-none">/</span>
+          <span class="px-1">{% block title %}{% endblock %}</span>
+        {% endif %}
+      </div>
+
+      {% block inner_content %}{% endblock %}
+    </div>
+  </article>
+{% endblock %}

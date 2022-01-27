@@ -1,0 +1,109 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Hosts{% endblock %}
+
+{% block content %}
+  <header class="mb-8 flex items-center justify-between">
+    <h2 class="page-title">Hosts</h2>
+
+    <div class="mr-auto ml-4 flex items-center text-gray-500">
+      <a href="{{ path('app.hosts.index') }}"
+         class="mr-2 button button--outlined button--dense {{ grouping != 'zones' ? 'button--active' : '' }}">
+        <span class="material-icons text-base leading-5">
+          view_headline
+        </span>
+        <span class="ml-1">By Host</span>
+      </a>
+      <a href="{{ path('app.hosts.index', {'group': 'zones'}) }}"
+         class="button button--outlined button--dense {{ grouping == 'zones' ? 'button--active' : '' }}">
+        <span class="material-icons text-base leading-5">
+          view_module
+        </span>
+        <span class="ml-1">By Zone</span>
+      </a>
+    </div>
+
+    <a href="{{ path('app.hosts.add') }}"
+       class="ml-4 button button--primary button--raised">
+      <span>Add host</span>
+    </a>
+  </header>
+
+  {% if grouping == 'zones' %}
+    <div>
+      <section class="py-2 mb-2">
+        <header class="mb-2">
+          <h3 class="text-lg font-medium">Hosts outside zones</h3>
+        </header>
+
+        <ul>
+          {% for host in hosts %}
+            <li class="contents">
+              <a href="{{ path('app.hosts.edit', {'id': host.id}) }}"
+                 class="group flex justify-between items-center py-2 px-4 rounded bg-gray-100 hover:bg-gray-50 hover:border-gray-100 transition-all dark:bg-gray-700 dark:hover:bg-gray-800 shadow {{ not loop.first ? ' mt-2' : '' }}">
+                <span>{{ host.displayName ?? host.fullyQualifiedName }}</span>
+                <span class="text-gray-400 group-hover:text-gray-500 text-sm transition-all">{{ host.securityZones | join(', ') }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      {% for zone in zones %}
+        <section class="py-2 mb-2">
+          <header class="mb-2">
+            <h3 class="text-lg font-medium">
+              {{ zone.displayName ?? zone.identifier }}
+            </h3>
+          </header>
+          <ul>
+            {% for host in zone.hosts %}
+              <li class="contents">
+                <a href="{{ path('app.hosts.edit', {'id': host.id}) }}"
+                   class="group flex justify-between items-center py-2 px-4 rounded bg-gray-100 hover:bg-gray-50 hover:border-gray-100 transition-all dark:bg-gray-700 dark:hover:bg-gray-800 shadow {{ not loop.first ? ' mt-2' : '' }}">
+                  <span>{{ host.displayName ?? host.fullyQualifiedName }}</span>
+                  <span class="text-gray-400 group-hover:text-gray-500 text-sm transition-all">{{ host.securityZones | join(', ') }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+
+      <a class="flex items-center justify-center mt-8 p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-400 font-regular text-lg"
+         href="{{ path('app.hosts.zones.add') }}">
+        <span class="material-icons">add</span>
+        <span class="ml-2">Add security zone</span>
+      </a>
+    </div>
+  {% else %}
+    <ul>
+      {% for host in hosts %}
+        <li class="contents">
+          <a href="{{ path('app.hosts.edit', {'id': host.id}) }}"
+             class="group flex justify-between items-center py-2 px-4 rounded bg-gray-100 hover:bg-gray-50 hover:border-gray-100 transition-all dark:bg-gray-700 dark:hover:bg-gray-800 shadow {{ not loop.first ? ' mt-2' : '' }}">
+            <span>{{ host.displayName ?? host.fullyQualifiedName }}</span>
+            <span class="text-gray-400 group-hover:text-gray-500 text-sm transition-all">{{ host.securityZones | join(', ') }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if zones is empty %}
+    <a href="{{ path('app.hosts.zones.add') }}">
+      <article id="no-zones-created"
+               class="relative h-56 py-4 px-6 mt-16 overflow-hidden rounded-lg shadow-xl shadow-blue-500/20 dark:shadow-blue-900/20 hover:shadow-2xl hover:shadow-blue-500/50 transition-all hover:bg-blue-600 bg-blue-500 dark:bg-blue-900 text-white">
+        <header class="w-full md:w-2/3 z-10 relative">
+          <strong class="text-3xl">Create your first zone</strong>
+          <p class="mt-4 text-gray-200">
+            It looks like you didn't create a security zone yet. Create a zone to
+            group hosts and grant selective access to users!
+          </p>
+        </header>
+
+        <div class="absolute w-2/3 md:w-1/3 sm:h-72 visible sm:visible opacity-50 md:opacity-100 -right-16 top-4 z-0 illustration illustration--track-and-field"></div>
+      </article>
+    </a>
+  {% endif %}
+{% endblock %}

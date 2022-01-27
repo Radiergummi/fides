@@ -1,0 +1,64 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}User {{ user.name ?? user.email }}{% endblock %}
+
+{% block content %}
+  <header class="flex justify-between items-center mb-8">
+    <h2 class="page-title flex items-center">
+      <span class="material-icons">person</span>
+      <span class="ml-2">{{ user.name ?? user.email }}</span>
+    </h2>
+
+    <a href="{{ path('app.team.users.edit', {'id': user.id}) }}"
+       class="ml-4 button button--primary button--raised">
+      <span>Edit</span>
+    </a>
+  </header>
+
+  <div class="flex items-stretch">
+    <div class="flex-grow">
+
+      <section>
+        <header class="mb-2">
+          <h3 class="text-xl font-medium">Active Certificates</h3>
+        </header>
+
+        {% if certificates is not empty %}
+          <ul>
+            {% for certificate in certificates %}
+              <li class="contents">
+                <a href="{{ path('app.certificates.single', {'id': certificate.id}) }}"
+                   class="flex justify-between items-center bg-gray-100 dark:bg-gray-800 border dark:border-gray-700 shadow-sm mb-2 py-2 px-4 rounded">
+                  <code>#{{ certificate.serialNumber }}</code>
+                  <span class="ml-4 text-gray-500 dark:text-gray-400">{{ certificate.user.userIdentifier }}</span>
+                  <span class="ml-auto">{{ certificate.createdAt.format('d.m.Y H:i') }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <span class="text-gray-500">This user has no certificates yet.</span>
+        {% endif %}
+      </section>
+
+    </div>
+
+    <aside class="w-1/4 ml-8 p-4 rounded-lg shadow-lg flex flex-col items-center justify-center bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
+      <img src="{{ gravatar(user.email) }}"
+           class="w-16 h-16 rounded-full"
+           alt="Gravatar Image for {{ user.email }}">
+      <h3 class="text-lg font-medium mt-4">{{ user.name ?? user.email }}</h3>
+      <span class="text-sm text-gray-500">Created {{ user.createdAt | ago }} </span>
+
+      <hr>
+
+      <span>
+        {% if user.securityZones.count > 0 %}
+          {{ user.securityZones | map(zone => zone.displayName ?? zone.identifier) | join(', ') }}
+        {% else %}
+          No security zones
+        {% endif %}
+      </span>
+    </aside>
+  </div>
+{% endblock %}

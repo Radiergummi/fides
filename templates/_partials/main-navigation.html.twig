@@ -1,0 +1,24 @@
+{% from '_macros/navigation-link.html.twig' import navigationLink -%}
+
+<nav class="flex items-center ml-8">
+  {{ navigationLink('Team', path('app.team.index'), {
+    'class': 'px-4 text-white',
+    'active_class': 'bg-blue-500 rounded-full hover:text-white',
+    'strict': false
+  }) }}
+  {{ navigationLink('Hosts', path('app.hosts.index'), {
+    'class': 'px-4 text-white',
+    'active_class': 'bg-blue-500 rounded-full hover:text-white',
+    'strict': false
+  }) }}
+  {{ navigationLink('Certificates', path('app.certificates.index'), {
+    'class': 'px-4 text-white',
+    'active_class': 'bg-blue-500 rounded-full hover:text-white',
+    'strict': false
+  }) }}
+  {{ navigationLink('Settings', path('app.settings.index'), {
+    'class': 'px-4 text-white',
+    'active_class': 'bg-blue-500 rounded-full hover:text-white',
+    'strict': false
+  }) }}
+</nav>

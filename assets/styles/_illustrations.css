@@ -1,0 +1,7 @@
+.illustration {
+    @apply bg-no-repeat bg-center bg-contain;
+}
+
+.illustration.illustration--track-and-field {
+    background-image: url('../images/illustrations/track-and-field.svg');
+}

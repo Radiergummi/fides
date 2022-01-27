@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#1f2937">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Fides{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Outfit:wght@200;300;400;500&display=swap"
+          rel="stylesheet">
+
+    {% block stylesheets %}
+      {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+      {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+  </head>
+  <body class="flex flex-col min-h-screen">
+    {% include   '_partials/header.html.twig' %}
+
+    <main class="py-16 flex-grow">
+      {% block body %}{% endblock %}
+    </main>
+
+    {% include '_partials/footer.html.twig' %}
+  </body>
+</html>

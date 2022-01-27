@@ -1,0 +1,27 @@
+{% extends '_layout/default.html.twig' %}
+
+{% block title %}Certificate #{{ certificate.serialNumber }}{% endblock %}
+
+{% block content %}
+  <article class="card max-w-xl mx-auto">
+    <header class="card__card-header">
+      <h2 class="font-medium text-xl">
+        Are you sure you want to revoke this certificate?
+      </h2>
+    </header>
+
+    {{ form_start(confirmCertificateRevokationForm) }}
+    <div class="card__card-body">
+      <p class="text-sm">
+        This will cause all connections using this certificate to be denied.
+        This action cannot be reverted for security reasons.
+      </p>
+      {{ form_row(confirmCertificateRevokationForm.confirm) }}
+    </div>
+    <footer class="card__card-footer flex items-center">
+      {{ form_row(confirmCertificateRevokationForm.submit, {'attr': {'class': 'mt-0 button--danger'}}) }}
+      {{ form_row(confirmCertificateRevokationForm.back, {'attr': {'class': 'ml-2 button--depressed'}}) }}
+    </footer>
+    {{ form_end(confirmCertificateRevokationForm) }}
+  </article>
+{% endblock %}

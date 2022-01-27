@@ -1,0 +1,23 @@
+.table {
+    @apply w-full border-collapse;
+}
+
+.table th, .table tr {
+    @apply py-2;
+}
+
+.table th {
+    @apply text-left font-medium whitespace-nowrap;
+}
+
+.table td {
+    @apply pl-2;
+}
+
+.table tr {
+    @apply border-gray-200 dark:border-gray-700;
+}
+
+.table tr:not(:first-child) {
+    @apply border-t;
+}
