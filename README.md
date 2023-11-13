@@ -1,3 +1,8 @@
+> **Note: This project has moved to [@zen-trust](https://github.com/zen-trust/app).**
+> The newer project also uses a brand-new, Node.js-based tech stack.
+
+---------
+
 Fides
 =====
 Fides is an SSH certificate signing server. It enables zero-trust infrastructure for your engineers by dynamically, and
